@@ -1,0 +1,25 @@
+User-agent: *
+Allow: /
+
+# منع فهرسة الملفات الحساسة
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /login
+
+# منع فهرسة ملفات النظام
+Disallow: /.htaccess
+Disallow: /.htpasswd
+
+# منع فهرسة مجلدات البناء والحزم
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /src/
+
+# السماح بفهرسة الصور
+Allow: /img/
+Allow: /images/
+
+# Sitemap
+Sitemap: https://etqan-elkaleg.com/sitemap.xml

@@ -1,0 +1,125 @@
+# تشغيل Rewrite
+RewriteEngine On
+
+# تحويل الموقع إلى HTTPS و non-www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\.etqan-elkaleg\.com$ [NC]
+RewriteRule ^(.*)$ https://etqan-elkaleg.com/$1 [L,R=301]
+
+# 301 Redirects - Consolidation & Cannibalization Fixes
+Redirect 301 /blogs/best-tank-cleaning-company-in-riyadh/ https://etqan-elkaleg.com/best-water-tank-cleaning-company-in-riyadh/
+Redirect 301 /blogs/best-tank-cleaning-and-sanitizing-company/ https://etqan-elkaleg.com/sterilization-of-water-tanks/
+Redirect 301 /blogs/best-tank-cleaning-and-maintenance-company-in-riyadh/ https://etqan-elkaleg.com/tank-maintenance/
+Redirect 301 /blogs/gulf-masters-water-tank-cleaning-company/ https://etqan-elkaleg.com/about/
+Redirect 301 /blogs/cleaning-and-disinfecting-water-tanks/ https://etqan-elkaleg.com/cleaning-water-tanks/
+Redirect 301 /blogs/tank-cleaning-and-disinfection-service/ https://etqan-elkaleg.com/cleaning-water-tanks/
+Redirect 301 /blogs/cleaning-and-disinfecting-tanks-with-the-best-technicians/ https://etqan-elkaleg.com/cleaning-water-tanks/
+Redirect 301 /blogs/home-villa-water-tank-cleaning/ https://etqan-elkaleg.com/cleaning-water-tanks/
+Redirect 301 /blogs/cheapest-drinking-water-tank-disinfection-company-riyadh/ https://etqan-elkaleg.com/sterilization-of-water-tanks/
+Redirect 301 /blogs/the-importance-of-insulating-tanks/ https://etqan-elkaleg.com/tank-insulation-in-riyadh/
+Redirect 301 /blogs/cleaning-underground-and-above-ground-tanks/ https://etqan-elkaleg.com/cleaning-underground-tanks/
+Redirect 301 /blogs/tank-leak-detection/ https://etqan-elkaleg.com/tank-leak-detection/
+Redirect 301 /blogs/cleaning-and-leak-detection-of-water-tanks/ https://etqan-elkaleg.com/tank-leak-detection/
+Redirect 301 /tank-cleaning-and-leakdetection-company/ https://etqan-elkaleg.com/tank-leak-detection/
+
+# Pricing Consolidation 301s
+Redirect 301 /blogs/water-tank-cleaning-in-riyadh-at-reasonable-prices/ https://etqan-elkaleg.com/pricing/
+Redirect 301 /blogs/best-water-tank-cleaning-prices-in-riyadh/ https://etqan-elkaleg.com/pricing/
+Redirect 301 /blogs/cheapest-tank-cleaning-company-riyadh-insulation-maintenance/ https://etqan-elkaleg.com/pricing/
+Redirect 301 /blogs/best-prices-insulation-cleaning-tanks-riyadh/ https://etqan-elkaleg.com/pricing/
+
+# Corrected Slugs 301s
+Redirect 301 /blogs/best-safe-companies-in-riyadh/ https://etqan-elkaleg.com/services/
+Redirect 301 /blogs/how-to-protect-safes-from-damage/ https://etqan-elkaleg.com/blogs/how-to-protect-water-tanks/
+Redirect 301 /blogs/safe-maintenance-tools/ https://etqan-elkaleg.com/blogs/water-tank-maintenance-tools/
+Redirect 301 /blogs/protecting-safes-from-leaks-and-damage/ https://etqan-elkaleg.com/blogs/how-to-protect-water-tanks/
+Redirect 301 /blogs/water-tank-prices-riyadh/ https://etqan-elkaleg.com/blogs/water-tank-cleaning-materials/
+Redirect 301 /blogs/water-tank-price/ https://etqan-elkaleg.com/blogs/signs-your-tank-needs-cleaning/
+
+# Local Areas 301s
+Redirect 301 /blogs/24-hour-tank-cleaning-company/ https://etqan-elkaleg.com/areas/north-riyadh/
+Redirect 301 /blogs/tank-cleaning-company-in-northern-riyadh/ https://etqan-elkaleg.com/areas/north-riyadh/
+Redirect 301 /blogs/cheapest-tank-cleaning-company-east-riyadh/ https://etqan-elkaleg.com/areas/east-riyadh/
+Redirect 301 /blogs/best-water-tank-cleaning-and-disinfection-company-east-riyadh/ https://etqan-elkaleg.com/areas/east-riyadh/
+
+
+# حذف index.html من الرابط
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [R=301,L]
+
+# حذف .html من الرابط
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# إعادة التوجيه من html إلى بدون html
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# منع تصفح المجلدات
+Options -Indexes
+
+# ضغط الملفات لتسريع الموقع (GZIP / DEFLATE)
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE image/svg+xml
+AddOutputFilterByType DEFLATE font/woff2
+AddOutputFilterByType DEFLATE font/ttf
+AddOutputFilterByType DEFLATE font/opentype
+</IfModule>
+
+# تفعيل الكاش المتطور (Expires Headers)
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access plus 1 month"
+
+# Images
+ExpiresByType image/jpeg "access plus 1 year"
+ExpiresByType image/gif "access plus 1 year"
+ExpiresByType image/png "access plus 1 year"
+ExpiresByType image/webp "access plus 1 year"
+ExpiresByType image/svg+xml "access plus 1 year"
+ExpiresByType image/x-icon "access plus 1 year"
+
+# Fonts
+ExpiresByType font/ttf "access plus 1 year"
+ExpiresByType font/woff "access plus 1 year"
+ExpiresByType font/woff2 "access plus 1 year"
+ExpiresByType application/font-woff "access plus 1 year"
+
+# CSS & JavaScript
+ExpiresByType text/css "access plus 1 month"
+ExpiresByType application/javascript "access plus 1 month"
+ExpiresByType text/javascript "access plus 1 month"
+
+# HTML
+ExpiresByType text/html "access plus 1 hour"
+</IfModule>
+
+# Cache-Control Headers
+<IfModule mod_headers.c>
+    <FilesMatch "\.(ico|jpe?g|png|gif|webp|svg|woff2?|ttf|eot)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+</IfModule>
+
+# حماية بعض الملفات
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# تحسين الأمان
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Content-Type-Options "nosniff"
+Header set X-Frame-Options "SAMEORIGIN"
